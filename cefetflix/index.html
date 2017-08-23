@@ -1,0 +1,53 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./css/estilo.css"/>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/filmes.js"></script>
+	<script >
+		$(function(){
+				function escolher(vetor,objID){
+				var objescolhido;
+					$.each(vetor,function(ind,objeto){
+						if(objeto.id==objID){
+							objescolhido=objeto;
+						}
+					});
+				return objescolhido;
+			}
+
+			$.each(filmes,function(id,obj){
+				
+				console.log(obj.opinioes);
+				var $divOpinioes = $("<div />");
+				
+				$.each(obj.opinioes, function(i, avaliacao){
+					$divOpinioes.append($("<p />").text(avaliacao.rating + "   " + avaliacao.descricao))
+				});
+				$("#filmes")
+					//.append($("<img />").attr("src",obj.figura))
+					.append($("<li />").attr("id",obj.id).text(obj.titulo).attr("id","titulo"))
+					//.append($("<p />").text("Resumo: " + obj.resumo))
+					//.append($("<h4/>").text("Gênero: " + obj.generos))
+					//.append($("<p />").text("Classificação: "+obj.classificacao+" anos"))
+					//.append($("<p />").text("Elenco: " + obj.elenco))
+					//.append($divOpinioes);
+					//.append($("<p />").text(obj.opnioes.descricao));
+			})
+			$.("#filmes").on("click","li",function(){
+				var definicao=escolher(filmes,$(this).attr("id"));
+
+			})
+		})
+
+
+	</script>
+</head>
+<body>
+	<h1>CEFETFLIX</h1>
+	<ul id="filmes"></ul>
+	<div id="descricao">
+	</div>
+</body>
+</html>
